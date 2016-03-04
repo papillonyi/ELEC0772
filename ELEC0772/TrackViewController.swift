@@ -15,6 +15,7 @@ class TrackViewController: UIViewController {
   @IBOutlet weak var majorLabel: UILabel!
   @IBOutlet weak var minorLabel: UILabel!
   @IBOutlet weak var identifierLabel: UILabel!
+  @IBOutlet weak var trackStatusLabel: UILabel!
   
   
   let locationManager = CLLocationManager()
@@ -35,6 +36,11 @@ class TrackViewController: UIViewController {
     locationManager.requestWhenInUseAuthorization()
     startRangingBeacons(beaconRegion)
     setLabels(beaconRegion)
+    trackStatusLabel.text = "Tracking"
+  }
+  @IBAction func stopTrack() {
+    locationManager.stopRangingBeaconsInRegion(beaconRegion)
+    trackStatusLabel.text = ""
   }
   
   func startRangingBeacons(region: CLBeaconRegion) {
@@ -53,8 +59,14 @@ class TrackViewController: UIViewController {
 
 extension TrackViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
-    <#code#>
+    print(beacons)
   }
+  
+  func locationManager(manager: CLLocationManager, rangingBeaconsDidFailForRegion region: CLBeaconRegion, withError error: NSError) {
+    print("ranging Beacons fail \(error)")
+  }
+  
+  
 }
 
 
