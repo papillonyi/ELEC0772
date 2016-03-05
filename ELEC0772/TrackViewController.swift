@@ -19,7 +19,10 @@ class TrackViewController: UIViewController {
   
   
   let locationManager = CLLocationManager()
-  let beaconRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "1B98B576-0147-4E01-99F7-F2419E42EB77")!, major: 1, minor: 1, identifier: "CY")
+  var beaconRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "1B98B576-0147-4E01-99F7-F2419E42EB77")!, major: 1, minor: 1, identifier: "CY")
+  
+  
+  
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -41,12 +44,21 @@ class TrackViewController: UIViewController {
     trackStatusLabel.text = "Tracking"
   }
   @IBAction func stopTrack() {
-    locationManager.stopRangingBeaconsInRegion(beaconRegion)
+    stopRangingBeacons(beaconRegion)
     trackStatusLabel.text = ""
   }
   
   func startRangingBeacons(region: CLBeaconRegion) {
+    region.notifyEntryStateOnDisplay = true
+    region.notifyOnEntry = true
+    region.notifyOnExit = true
     locationManager.startRangingBeaconsInRegion(region)
+    locationManager.startMonitoringForRegion(region)
+  }
+  
+  func stopRangingBeacons(region: CLBeaconRegion) {
+    locationManager.stopRangingBeaconsInRegion(region)
+    locationManager.stopMonitoringForRegion(region)
   }
   
   func setTrackLabels(region: CLBeaconRegion) {
@@ -61,11 +73,22 @@ class TrackViewController: UIViewController {
 
 extension TrackViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
-    print(beacons)
+    print(region)
+    if beacon != nil {
+      print(beacons)
+    }
   }
   
   func locationManager(manager: CLLocationManager, rangingBeaconsDidFailForRegion region: CLBeaconRegion, withError error: NSError) {
-    print("ranging Beacons fail \(error)")
+    print("ranging Beacons fail \(error,description)")
+  }
+  
+  func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError) {
+    print("Failed monitoring region: \(error.description)")
+  }
+  
+  func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+    print("Location manager failed: \(error.description)")
   }
   
   
