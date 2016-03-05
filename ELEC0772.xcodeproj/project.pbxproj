@@ -295,6 +295,7 @@
 				A16380F91C89764600C4ACA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

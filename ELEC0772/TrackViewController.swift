@@ -11,10 +11,10 @@ import CoreBluetooth
 import CoreLocation
 
 class TrackViewController: UIViewController {
-  @IBOutlet weak var UUIDLabel: UILabel!
-  @IBOutlet weak var majorLabel: UILabel!
-  @IBOutlet weak var minorLabel: UILabel!
-  @IBOutlet weak var identifierLabel: UILabel!
+  @IBOutlet weak var trackUUIDLabel: UILabel!
+  @IBOutlet weak var trackMajorLabel: UILabel!
+  @IBOutlet weak var trackMinorLabel: UILabel!
+  @IBOutlet weak var trackIdentifierLabel: UILabel!
   @IBOutlet weak var trackStatusLabel: UILabel!
   
   
@@ -23,8 +23,11 @@ class TrackViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    locationManager.requestAlwaysAuthorization()
+    print("hehehehehhe")
+    }
+
     // Do any additional setup after loading the view, typically from a nib.
-  }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -33,9 +36,8 @@ class TrackViewController: UIViewController {
   
   @IBAction func trackButton() {
     locationManager.delegate = self
-    locationManager.requestWhenInUseAuthorization()
     startRangingBeacons(beaconRegion)
-    setLabels(beaconRegion)
+    setTrackLabels(beaconRegion)
     trackStatusLabel.text = "Tracking"
   }
   @IBAction func stopTrack() {
@@ -47,11 +49,11 @@ class TrackViewController: UIViewController {
     locationManager.startRangingBeaconsInRegion(region)
   }
   
-  func setLabels(region: CLBeaconRegion) {
-    UUIDLabel.text = region.proximityUUID.UUIDString
-    majorLabel.text = region.major?.description
-    minorLabel.text = region.minor?.description
-    identifierLabel.text = region.identifier
+  func setTrackLabels(region: CLBeaconRegion) {
+    trackUUIDLabel.text = region.proximityUUID.UUIDString
+    trackMajorLabel.text = region.major?.description
+    trackMinorLabel.text = region.minor?.description
+    trackIdentifierLabel.text = region.identifier
   }
 
 

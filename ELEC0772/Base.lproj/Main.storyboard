@@ -85,11 +85,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="track" image="second" id="cPa-gy-q4n"/>
                     <connections>
-                        <outlet property="UUIDLabel" destination="9jf-Rx-nRk" id="X3z-fP-VEF"/>
-                        <outlet property="identifierLabel" destination="bXT-Be-f1W" id="QHq-6F-7fM"/>
-                        <outlet property="majorLabel" destination="hKM-Al-yTo" id="TT2-QG-bxI"/>
-                        <outlet property="minorLabel" destination="Yzh-O4-O7l" id="fm7-m4-10Y"/>
+                        <outlet property="trackIdentifierLabel" destination="bXT-Be-f1W" id="a1B-qx-6la"/>
+                        <outlet property="trackMajorLabel" destination="hKM-Al-yTo" id="Ano-hD-1g9"/>
+                        <outlet property="trackMinorLabel" destination="Yzh-O4-O7l" id="879-s5-ipD"/>
                         <outlet property="trackStatusLabel" destination="dBd-Zo-UKT" id="DhG-FG-hlM"/>
+                        <outlet property="trackUUIDLabel" destination="9jf-Rx-nRk" id="oAu-wS-Gkp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
