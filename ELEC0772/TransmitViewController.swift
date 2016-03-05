@@ -19,7 +19,7 @@ class TransmitViewController: UIViewController {
   
   let beaconRegion = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "1B98B576-0147-4E01-99F7-F2419E42EB77")!, major: 1, minor: 1, identifier: "CY")
   var beaconPeripheralData = [String : AnyObject]()
-  var peripheralManager: CBPeripheralManager?
+  var peripheralManager: CBPeripheralManager!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -35,17 +35,17 @@ class TransmitViewController: UIViewController {
   
   @IBAction func startButton() {
     
-    startTransmit()
+    startTransmit(beaconRegion)
   }
   
   @IBAction func stopButton() {
     stopTransmit()
   }
   
-  func startTransmit() {
+  func startTransmit(Region: CLBeaconRegion) {
     peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
-    beaconPeripheralData = beaconRegion.peripheralDataWithMeasuredPower(nil) as! [String : AnyObject]
-
+    beaconPeripheralData = Region.peripheralDataWithMeasuredPower(nil) as! [String : AnyObject]
+    peripheralManager.startAdvertising(beaconPeripheralData)
 
     transmitStatusLabel.text = "Tracking"
     
@@ -53,6 +53,7 @@ class TransmitViewController: UIViewController {
   
   func stopTransmit() {
     transmitStatusLabel.text = ""
+    peripheralManager.stopAdvertising()
   
   }
   
@@ -69,7 +70,7 @@ class TransmitViewController: UIViewController {
 
 extension TransmitViewController: CBPeripheralManagerDelegate {
   func peripheralManagerDidStartAdvertising(peripheral: CBPeripheralManager, error: NSError?) {
-    <#code#>
+    print(error)
   }
   
   func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager) {
