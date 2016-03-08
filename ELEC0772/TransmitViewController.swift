@@ -47,12 +47,12 @@ class TransmitViewController: UIViewController {
     beaconPeripheralData = Region.peripheralDataWithMeasuredPower(nil) as! [String : AnyObject]
     peripheralManager.startAdvertising(beaconPeripheralData)
 
-    transmitStatusLabel.text = "Transmit"
+    transmitStatusLabel.text = "Transmitting"
     
   }
   
   func stopTransmit() {
-    transmitStatusLabel.text = ""
+    transmitStatusLabel.text = "Stop"
     peripheralManager.stopAdvertising()
   
   }

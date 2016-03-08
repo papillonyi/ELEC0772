@@ -16,6 +16,10 @@ class TrackViewController: UIViewController {
   @IBOutlet weak var trackMinorLabel: UILabel!
   @IBOutlet weak var trackIdentifierLabel: UILabel!
   @IBOutlet weak var trackStatusLabel: UILabel!
+  //@IBOutlet weak var trackProximityHashValue: UILabel?
+  //@IBOutlet weak var trackProximityRawValue: UILabel?
+  @IBOutlet weak var trackRssi: UILabel?
+  @IBOutlet weak var trackDistance: UILabel?
   
   
   let locationManager = CLLocationManager()
@@ -45,7 +49,14 @@ class TrackViewController: UIViewController {
   }
   @IBAction func stopTrack() {
     stopRangingBeacons(beaconRegion)
-    trackStatusLabel.text = ""
+    trackStatusLabel.text = "Stop"
+    trackUUIDLabel.text = ""
+    trackMajorLabel.text = ""
+    trackMinorLabel.text = ""
+    trackIdentifierLabel.text = ""
+    trackRssi?.text = ""
+    trackDistance?.text = ""
+    
   }
   
   func startRangingBeacons(region: CLBeaconRegion) {
@@ -54,11 +65,13 @@ class TrackViewController: UIViewController {
     region.notifyOnExit = true
     locationManager.startRangingBeaconsInRegion(region)
     locationManager.startMonitoringForRegion(region)
+    locationManager.startUpdatingLocation()
   }
   
   func stopRangingBeacons(region: CLBeaconRegion) {
     locationManager.stopRangingBeaconsInRegion(region)
     locationManager.stopMonitoringForRegion(region)
+    locationManager.stopUpdatingLocation()
   }
   
   func setTrackLabels(region: CLBeaconRegion) {
@@ -67,15 +80,35 @@ class TrackViewController: UIViewController {
     trackMinorLabel.text = region.minor?.description
     trackIdentifierLabel.text = region.identifier
   }
+  
+  func nameForProximity(proximity: CLProximity) -> String {
+    switch proximity {
+    case .Unknown:
+      return "Unknown"
+    case .Immediate:
+      return "Immediate"
+    case .Near:
+      return "Near"
+    case .Far:
+      return "Far"
+    }
+  }
 
 
 }
 
 extension TrackViewController: CLLocationManagerDelegate {
   func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
-    print(region)
-    if beacon != nil {
-      print(beacons)
+    if beacons.count > 0 {
+      //print(beacons.last)
+    
+      //trackProximityHashValue? = String(beacons.last?.accuracy.hashValue)
+      //trackProximityRawValue?.text = String(beacons.last? .proximity.rawValue)
+      trackRssi?.text = String(beacons.last?.rssi)
+      
+      let proximity = nameForProximity((beacons.last?.proximity)!)
+      let accuracy = String(format: "%.2F", (beacons.last?.accuracy)!)
+      trackDistance?.text = "Location: \(proximity) (approx. \(accuracy)m)"
     }
   }
   
@@ -89,6 +122,10 @@ extension TrackViewController: CLLocationManagerDelegate {
   
   func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
     print("Location manager failed: \(error.description)")
+  }
+  
+  func locationManager(manager: CLLocationManager, didStartMonitoringForRegion region: CLRegion) {
+    print("didstartmonitoringforregion")
   }
   
   
