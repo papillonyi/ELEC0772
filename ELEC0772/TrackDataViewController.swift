@@ -12,36 +12,37 @@ import CoreLocation
 import CoreBluetooth
 
 protocol TrackDataViewControllerDelegate: class {
+  func getRssiData(controller: TrackDataViewController)
   
 }
 
 class TrackDataViewController: UITableViewController {
-  var items = ["heheh","hahahah"]
+  var rssiData = [String]()
+  var rssiData1 = "11.11"
+  var rssidata2 = "22.22"
+  weak var delegate: TrackDataViewControllerDelegate?
   
   override func viewDidLoad() {
-    dismissViewControllerAnimated(true, completion: nil)
+    super.viewDidLoad()
+    delegate?.getRssiData(self)
+    rssiData.append(rssiData1)
+    rssiData.append(rssidata2)
   }
+  
 
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 5
+    
+    return rssiData.count
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier( "CellItem", forIndexPath: indexPath)
     let label = cell.viewWithTag(10000) as! UILabel
-    label.text = String(indexPath.row)
+    label.text = rssiData[indexPath.row]
 
     return cell
   }
   
-  @IBAction func addItem() {
-      let newRowIndex = items.count
-      let item = "I am a new row"
-      items.append(item)
-      let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
-      let indexPaths = [indexPath]
-      tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
-  }
   
   
 }

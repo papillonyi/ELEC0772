@@ -86,7 +86,5 @@ extension TransmitViewController: CBPeripheralManagerDelegate {
   }
 }
 
-extension TransmitViewController: TrackDataViewControllerDelegate {
-  
-}
+
 

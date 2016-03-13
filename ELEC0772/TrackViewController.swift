@@ -9,12 +9,9 @@
 import UIKit
 import CoreBluetooth
 import CoreLocation
-protocol TrackViewControllerDelegate: class {
-  
-}
 
 
-class TrackViewController: UIViewController  {
+class TrackViewController: UIViewController, TrackDataViewControllerDelegate {
   @IBOutlet weak var trackUUIDLabel: UILabel!
   @IBOutlet weak var trackMajorLabel: UILabel!
   @IBOutlet weak var trackMinorLabel: UILabel!
@@ -24,8 +21,7 @@ class TrackViewController: UIViewController  {
   //@IBOutlet weak var trackProximityRawValue: UILabel?
   @IBOutlet weak var trackRssi: UILabel?
   @IBOutlet weak var trackDistance: UILabel?
-  
-  weak var delegate: TrackDataViewControllerDelegate?
+  var rssiData: [String]?
   
   
   
@@ -101,6 +97,16 @@ class TrackViewController: UIViewController  {
       return "Far"
     }
   }
+  
+  func getRssiData(controller: TrackDataViewController) {
+    
+    print("getRssiData")
+    if rssiData != nil {
+      //return rssiData!
+    } else {
+      //return ["No Track"]
+    }
+  }
 
 
 }
@@ -128,7 +134,7 @@ extension TrackViewController: CLLocationManagerDelegate {
     print("Failed monitoring region: \(error.description)")
   }
   
-  func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+  func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
     print("Location manager failed: \(error.description)")
   }
   
