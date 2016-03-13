@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A11E90061C9282C900860B7A /* TrackDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E90051C9282C900860B7A /* TrackDataViewController.swift */; };
 		A16380E71C89764600C4ACA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16380E61C89764600C4ACA5 /* AppDelegate.swift */; };
 		A16380E91C89764600C4ACA5 /* TrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16380E81C89764600C4ACA5 /* TrackViewController.swift */; };
 		A16380EB1C89764600C4ACA5 /* TransmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16380EA1C89764600C4ACA5 /* TransmitViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A11E90051C9282C900860B7A /* TrackDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackDataViewController.swift; sourceTree = "<group>"; };
 		A16380E31C89764600C4ACA5 /* ELEC0772.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ELEC0772.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A16380E61C89764600C4ACA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A16380E81C89764600C4ACA5 /* TrackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				A16380E81C89764600C4ACA5 /* TrackViewController.swift */,
 				A16380EA1C89764600C4ACA5 /* TransmitViewController.swift */,
 				A16380EC1C89764600C4ACA5 /* Main.storyboard */,
+				A11E90051C9282C900860B7A /* TrackDataViewController.swift */,
 				A16380EF1C89764600C4ACA5 /* Assets.xcassets */,
 				A16380F11C89764600C4ACA5 /* LaunchScreen.storyboard */,
 				A16380F41C89764600C4ACA5 /* Info.plist */,
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A11E90061C9282C900860B7A /* TrackDataViewController.swift in Sources */,
 				A16380EB1C89764600C4ACA5 /* TransmitViewController.swift in Sources */,
 				A16380E71C89764600C4ACA5 /* AppDelegate.swift in Sources */,
 				A16380E91C89764600C4ACA5 /* TrackViewController.swift in Sources */,
